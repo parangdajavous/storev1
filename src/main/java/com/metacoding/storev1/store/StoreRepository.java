@@ -37,4 +37,11 @@ public class StoreRepository {
         return (Store) query.getSingleResult();
     }
 
+    // 1
+    public void deleteById(int id) {
+        Query query = em.createNativeQuery("delete from store_tb where id =?");
+        query.setParameter(1, id);
+        query.executeUpdate();
+    }
+
 }

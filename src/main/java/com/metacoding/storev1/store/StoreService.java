@@ -30,4 +30,18 @@ public class StoreService {
         return store;
     }
 
+    // 3
+    @Transactional // insert, delete, update 시에 사용: 함수 종료 시 commit 됨
+    public void 상품삭제(int id) {
+        // 상품 있는지 확인
+        Store store = storeRepository.findbyId(id);
+
+        // 있으면 삭제
+        if (store == null) {
+            throw new RuntimeException("상품 없는데 왜 삭제?");
+        }
+        storeRepository.deleteById(id);
+
+    }
+
 }

@@ -43,8 +43,10 @@ public class StoreController {
         return "store/update-form";
     }
 
+    // 2
     @PostMapping("/store/{id}/delete")
     public String delete(@PathVariable("id") int id) {
+        storeService.상품삭제(id);
         return "redirect:/";
 
     }
