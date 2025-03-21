@@ -26,7 +26,7 @@ public class StoreService {
     }
 
     public Store 상세보기(int id) {
-        Store store = storeRepository.findbyId(id);
+        Store store = storeRepository.findById(id);
         return store;
     }
 
@@ -34,14 +34,30 @@ public class StoreService {
     @Transactional // insert, delete, update 시에 사용: 함수 종료 시 commit 됨
     public void 상품삭제(int id) {
         // 상품 있는지 확인
-        Store store = storeRepository.findbyId(id);
+        Store store = storeRepository.findById(id);
 
-        // 있으면 삭제
+        // 없으면 예외를 터트리기
         if (store == null) {
             throw new RuntimeException("상품 없는데 왜 삭제?");
         }
+
+        // 있으면 삭제
         storeRepository.deleteById(id);
 
     }
+
+    @Transactional
+    public void 상품수정(int id, String name, int stock, int price) {
+        // 상품 있는지 확인
+        Store store = storeRepository.findById(id);
+
+        // 없으면 예외를 터트리기
+        if (store == null) {
+            throw new RuntimeException("상품이 없는데 왜 삭제?");
+        }
+
+        // 있으면 수정
+        storeRepository.update(id, name, stock, price);
+    } // 되면 commit, 안 되면 rollback
 
 }
