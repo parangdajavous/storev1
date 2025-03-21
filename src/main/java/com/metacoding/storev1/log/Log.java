@@ -20,4 +20,5 @@ public class Log {
     private Integer qty; // 구매 개수
     private Integer totalPrice; // qty*store(price)
     private String buyer; // 구매자이름
+
 }
